@@ -24,9 +24,9 @@ export async function POST(request: Request) {
     const user = new User({ name, email, password: hashedPassword, role });
     await user.save();
 
-    return new NextResponse(JSON.stringify({ message: "✅ User successfully created" }), { status: 201 });
+    return new NextResponse(JSON.stringify({ message: "User successfully created" }), { status: 201 });
   } catch (error) {
-    console.error("❌ Signup error:", error);
+    console.error(" Signup error:", error);
     return new NextResponse(JSON.stringify({ error: "Server Error" }), { status: 500 });
   }
 }

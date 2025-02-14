@@ -44,20 +44,20 @@ const CalendarWithAttendance = ({ employeeId }: { employeeId: string }) => {
     return <div>{error}</div>;
   }
 
-  // Get the current month's first and last dates
+  
   const { firstDay, lastDay } = getFirstAndLastDate(currentDate);
 
-  // Map through the days of the month
+  
   const daysInMonth = [];
   for (let day = firstDay; day <= lastDay; day.setDate(day.getDate() + 1)) {
-    daysInMonth.push(new Date(day)); // Create an array of all dates in the month
+    daysInMonth.push(new Date(day)); 
   }
 
-  // Prepare attendance data to map by day
+  
   const attendanceByDate: Record<string, any> = {};
   attendance.forEach((attend: any) => {
-    const date = new Date(attend.checkIn).toLocaleDateString(); // Format to just the date part
-    attendanceByDate[date] = attend; // Store attendance by date
+    const date = new Date(attend.checkIn).toLocaleDateString(); 
+    attendanceByDate[date] = attend; 
   });
 
   return (

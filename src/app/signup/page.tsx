@@ -91,6 +91,7 @@ const SignupPage = () => {
             >
               <option value="hr">HR</option>
               <option value="employee">Employee</option>
+              <option value="manager">Manager</option>
             </select>
           </div>
 

@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import User from "@/app/models/User";
 
 
-// Connect to MongoDB (Avoid multiple connections)
 const connectDB = async () => {
   if (mongoose.connection.readyState === 1) return;
   await mongoose.connect(process.env.MONGODB_URI as string, {
@@ -14,9 +13,8 @@ const connectDB = async () => {
 
 export async function GET(req: NextRequest) {
   try {
-    await connectDB(); // Ensure DB is connected
-
-    // Fetch only employees (excluding HR & Manager)
+    await connectDB(); 
+    
     const employees = await User.find({ role: "employee" }).select("name email department");
 
     return NextResponse.json(employees, { status: 200 });

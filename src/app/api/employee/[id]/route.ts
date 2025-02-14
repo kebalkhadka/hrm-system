@@ -1,19 +1,29 @@
-// app/api/employee/[id]/route.ts
-import User from '@/app/models/User';
-import { NextResponse } from 'next/server';
+import { NextApiRequest, NextApiResponse } from "next";
+import mongoose from "mongoose";
+import User from "@/app/models/User";
+import connectDB from "@/app/lib/mongodb";
+import { NextResponse } from "next/server"; // Import NextResponse
 
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
-  const { id } = params;
+export async function GET(req: NextApiRequest, { params }: { params: { id: string } }) {
+  
+  const { id } = await params;
 
+  if (!id) {
+  
+    return NextResponse.json({ message: "Employee ID is required" }, { status: 400 });
+  }
+
+  await connectDB(); 
   try {
+    // Fetch employee details from the database
     const employee = await User.findById(id).select('name email department role');
-    if (!employee) {
-      return NextResponse.json({ message: 'Employee not found' }, { status: 404 });
-    }
-
+    
+    // Send the employee data as JSON response
     return NextResponse.json(employee);
   } catch (error) {
-    return NextResponse.json({ message: 'Error fetching employee data' }, { status: 500 });
+    console.error("Error fetching employee details:", error);
+    // Send error response
+    return NextResponse.json({ message: "Error fetching employee details" }, { status: 500 });
   }
 }

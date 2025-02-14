@@ -15,7 +15,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const res = await fetch('/api/employee'); // Fetch from your API
+        const res = await fetch('/api/employee'); 
         if (!res.ok) throw new Error('Failed to fetch');
         const data = await res.json();
         setEmployees(data);

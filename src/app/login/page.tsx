@@ -12,7 +12,7 @@ const LoginPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    setIsClient(true); // Set to true once the component is mounted
+    setIsClient(true); 
   }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
