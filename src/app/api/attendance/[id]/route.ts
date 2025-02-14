@@ -2,22 +2,21 @@ import { NextRequest, NextResponse } from "next/server";
 import Attendance from "@/app/models/Attendance";
 import connectDB from "@/app/lib/mongodb";
 
-// Connect to the database before handling requests
+// Ensure MongoDB is connected before handling requests
 connectDB();
 
-// Define the GET function with proper TypeScript types
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const { id } = params; // Correct way to access params
+    const { id } = params; // ✅ Correctly accessing params
 
     if (!id) {
       return NextResponse.json({ message: "Employee ID is required" }, { status: 400 });
     }
 
-    // Fetch attendance records for the given user ID
+    // ✅ Fetch attendance records for the given user ID
     const attendance = await Attendance.find({ userId: id }).sort({ createdAt: -1 });
 
-    if (!attendance || attendance.length === 0) {
+    if (!attendance.length) {
       return NextResponse.json({ message: "No attendance records found" }, { status: 404 });
     }
 
