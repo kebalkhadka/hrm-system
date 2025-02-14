@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import mongoose from "mongoose";
 import Attendance from "@/app/models/Attendance";
 import connectDB from "@/app/lib/mongodb";
 
